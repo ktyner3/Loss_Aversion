@@ -312,7 +312,7 @@ classdef LOSS_AVERSION < handle
             obj.outcomeEndIdx = LFP_idx(obj.eventIDs == endID);
 
             %% Can stick something here for if not 135 trials
-            x = 0;
+           
         end
 
         %% Generate epochs
@@ -332,6 +332,8 @@ classdef LOSS_AVERSION < handle
         function SPRiNT(obj,l_freq,h_freq)
 
             %% Notes
+            % This function performs SPRiNT-FOOOF (SPOOOF-ing) of each
+            % channel in individual epochs.
 
             %% Preallocate
             opt = struct();
@@ -378,7 +380,9 @@ classdef LOSS_AVERSION < handle
 
             %% Loop over epochs
             for ii = 1:length(obj.epochs)
-                ii
+
+                %% Print epoch
+                fprintf('Analyzing epoch %s..\n',num2str(ii))
 
                 %% Loop over channels
                 for jj = 1:length(obj.referencedChName)
@@ -404,7 +408,6 @@ classdef LOSS_AVERSION < handle
 
                 end
             end
-            x = 0;
         end
 
         %% Next function
