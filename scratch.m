@@ -4,6 +4,7 @@ clc;
 
 %% Add path
 addpath('C:\Users\Kevin_Tyner\Desktop\MATLAB\Code\Functions\');
+addpath('C:\Users\Kevin_Tyner\Documents\MATLAB\matnwb-2.6.0.2\');
 
 %% Set properties
 fname = 'Z:\LossAversion\Patient folders\CLASE018\NWB-processing\NWB_Data\CLASE018_Session_3_filter.nwb';
@@ -38,6 +39,9 @@ generateEpochs(obj);
 
 %% SPRiNT
 SPRiNT(obj,0.5,200);
+
+%% Save data
+saveData(obj);
 
 %% Allocate data
 %allocateData(obj); % finish here

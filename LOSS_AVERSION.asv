@@ -420,7 +420,7 @@ classdef LOSS_AVERSION < handle
             savePath = append(tempPath,'NeuroPhys_Processed\SPOOOF\');
 
             %% Check if directory exists
-            if ~isfolder(savePath)
+            if ~is(savePath)
                 mkdir(savePath);
             end
 
@@ -428,12 +428,12 @@ classdef LOSS_AVERSION < handle
             save_file = append(savePath,obj.subID,'_',obj.hemi,'_',obj.region,'.mat');
 
             %% Save the data
-            save(save_file,'obj');
+            save(save_file,)
             x = 0;
 
         end
 
-        %% Next function
+        
 
     end
 end
