@@ -429,7 +429,6 @@ classdef LOSS_AVERSION < handle
 
             %% Save the data
             save(save_file,'obj');
-            x = 0;
 
         end
 
