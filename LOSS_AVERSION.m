@@ -211,14 +211,14 @@ classdef LOSS_AVERSION < handle
             %obj.keepIdx = logical([1;1;1;0;1;1;1;1]); %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% for testing,
             while ii <= length(obj.keepIdx)
                 if obj.keepIdx(ii,1) == 1
-                    temp{ii,1} = obj.LFP_data(ii,:);
+                    temp{ii,1} = obj.filteredData(ii,:);
                     ch_name{ii,1} = append(obj.chanSname{ii,1},num2str(ii));
                     ii = ii + 1;
                 else
                     next_idx = find(obj.keepIdx(ii+1,1) == 1,1,"first");
                     if ~isempty(next_idx)
                         ii = ii + next_idx;
-                        temp{ii,1} = obj.LFP_data(ii,:);
+                        temp{ii,1} = obj.filteredData(ii,:);
                         ch_name{ii,1} = append(obj.chanSname{ii,1},num2str(ii));
                     else
                         break
@@ -237,14 +237,14 @@ classdef LOSS_AVERSION < handle
             ch_name = ch_name(~I);
 
             %% Loop to do the bipolar referencing
-            for ii = 1:size(obj.LFP_data,1)
-                if ii < size(obj.LFP_data,1)
-                    tmp = [obj.LFP_data(ii,:); obj.LFP_data(ii+1,:)];
-                    obj.referencedData(ii,:) = mean(tmp,1) - obj.LFP_data(ii,:);
+            for ii = 1:size(obj.filteredData,1)
+                if ii < size(obj.filteredData,1)
+                    tmp = [obj.filteredData(ii,:); obj.filteredData(ii+1,:)];
+                    obj.referencedData(ii,:) = mean(tmp,1) - obj.filteredData(ii,:);
                     obj.referencedChName{ii,1} = append(ch_name{ii,1},'-',ch_name{ii+1,1});
-                elseif ii == size(obj.LFP_data,1)
-                    tmp = [obj.LFP_data(ii,:); obj.LFP_data(1,:)];
-                    obj.referencedData(ii,:) = mean(tmp,1) - obj.LFP_data(ii,:);
+                elseif ii == size(obj.filteredData,1)
+                    tmp = [obj.filteredData(ii,:); obj.filteredData(1,:)];
+                    obj.referencedData(ii,:) = mean(tmp,1) - obj.filteredData(ii,:);
                     obj.referencedChName{ii,1} = append(ch_name{ii,1},'-',ch_name{1,1});
                 end
             end
